@@ -10,6 +10,7 @@ from probability_model import ProbabilityModel
 from volatility import VolatilityAnalyzer
 from trend import TrendAnalyzer
 from display import Display
+from tech_market_fetcher import TechMarketFetcher
 
 
 def run():
@@ -18,6 +19,7 @@ def run():
     prob_model = ProbabilityModel()
     volatility = VolatilityAnalyzer()
     trend_analyzer = TrendAnalyzer()
+    tech_fetcher = TechMarketFetcher()
     display = Display()
     display.hide_cursor()
 
@@ -30,6 +32,7 @@ def run():
                 # 1. Fetch market data
                 max_days = max(TIME_WINDOWS)
                 full_df = fetcher.fetch_market_data(days=max_days)
+                tech_changes = tech_fetcher.get_period_changes(TIME_WINDOWS)    # S&P500 Tech Market
 
                 # 2. Split windows
                 windowed_data = fetcher.split_by_time_windows(
@@ -59,7 +62,8 @@ def run():
                         **stats_by_window[days],
                         **probabilities.get(days, {}),
                         **volatility_data.get(days, {}),
-                        **trend_data.get(days, {})
+                        **trend_data.get(days, {}),
+                        "tech_change_pct": tech_changes.get(days)
                     }
 
                 # 9. Render

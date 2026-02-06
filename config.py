@@ -45,3 +45,10 @@ TREND_NEUTRAL_THRESHOLD = 0.002  # 0.2% difference
 # DISPLAY SETTINGS
 # =========================
 APP_TITLE = "BITCOIN MARKET ANALYZER"
+
+# =========================
+# S&P500 IT Market info
+# =========================
+TECH_SYMBOL = "QQQ"
+YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{}"
+STOOQ_URL = "https://stooq.com/q/d/l/?s=qqq.us&i=d"
